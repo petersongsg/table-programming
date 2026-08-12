@@ -25,6 +25,7 @@ to enable machine self‑learning.
 
 Core positioning: Code serves only as a fixed carrier; all business logic is configuration‑driven. To understand the entire machine 
 program, you only need to read the rule table.
+I am a veteran programmer, and I wish everyone freedom from the heavy toil of writing and revising code. Contact: songbinsg@gmail.com
 
 > **Core principle**: code is a fixed carrier; all business logic lives in configuration. Reading the rule table alone should be enough to understand the entire program.
 
