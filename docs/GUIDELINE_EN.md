@@ -1,6 +1,31 @@
-# Table Programming — Complete Development Guideline
+# Table-Driven Programming — A Disruptive Programming Approach
 
-> This document is the **sole authoritative guideline** for the entire framework. All project iterations, feature additions, bug fixes, and team handovers must strictly follow this document.
+> Are you still writing piles of if‑else statements for robots and automation equipment, struggling to maintain hard‑to‑read code?
+> Today I’d like to introduce you to table‑driven programming – a method where you only need to fill in tables to write programs.
+
+The core is a rule table. Each row of the table consists of several conditions and the corresponding subroutine name. The main 
+program runs in an endless loop, checking each row of the table in turn. When the conditions in a row are met, it executes the 
+subroutine specified in that row.
+
+With this approach, bottom‑level engineers are responsible for writing sensor‑acquisition and actuator‑driver plugins; application 
+engineers only need to fill in the table with rules – they do not need to read the underlying code. Even people with no programming 
+background can do it.
+
+The system is fully documentable and auditable. By opening the rule configuration table, you can see the entire control logic at a 
+glance: which sensors are relied upon, what conditions trigger which actions – without having to read through thousands of lines of 
+source code to trace the business flow. This completely frees you from the spaghetti code that often plagues deployment.
+
+In a nutshell: one rule table can carry the business logic of a wide variety of different devices. When adding new scenarios, you 
+only need to extend the driver subroutines and modify the rule table – you never have to rewrite the main program. Develop once, 
+reuse forever. For strongly time‑sequential tasks, you can add state variables.
+
+This method allows everyone to easily combine existing functions in various ways. Adding new features only requires local programming 
+– completely eliminating the pain of code maintenance. Moreover, this table‑driven approach can even turn the control table into a Q‑Table 
+to enable machine self‑learning.
+
+Core positioning: Code serves only as a fixed carrier; all business logic is configuration‑driven. To understand the entire machine 
+program, you only need to read the rule table.
+
 > **Core principle**: code is a fixed carrier; all business logic lives in configuration. Reading the rule table alone should be enough to understand the entire program.
 
 ---
