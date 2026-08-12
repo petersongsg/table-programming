@@ -1,0 +1,44 @@
+[
+  {
+    "name": "全局急停保护",
+    "src":  ["plugin_read_emergency_btn"],
+    "cond": "emergency_btn",
+    "act":  "action_full_stop"
+  },
+  {
+    "name": "传感器超时故障保护",
+    "src":  [],
+    "cond": "(time.time() - ts_io) > 0.2",
+    "act":  "action_full_stop"
+  },
+  {
+    "name": "待机等待启动指令",
+    "src":  ["plugin_read_start_btn"],
+    "cond": "task_stage=='idle' and start_btn",
+    "act":  "action_set_go_pick"
+  },
+  {
+    "name": "前往拾取点持续前进",
+    "src":  ["plugin_read_front_lidar", "plugin_read_pos"],
+    "cond": "task_stage=='go_pick' and pos_error>0.15 and front_dist>=0.6",
+    "act":  "action_move_forward"
+  },
+  {
+    "name": "拾取路径障碍物刹车",
+    "src":  ["plugin_read_front_lidar", "plugin_read_speed"],
+    "cond": "task_stage=='go_pick' and front_dist<0.6",
+    "act":  "action_brake"
+  },
+  {
+    "name": "到达拾取点切换抓取阶段",
+    "src":  ["plugin_read_pos"],
+    "cond": "task_stage=='go_pick' and pos_error<=0.15",
+    "act":  "action_set_gripping"
+  },
+  {
+    "name": "执行夹爪抓取物料",
+    "src":  [],
+    "cond": "task_stage=='gripping'",
+    "act":  "action_gripper_close"
+  }
+]

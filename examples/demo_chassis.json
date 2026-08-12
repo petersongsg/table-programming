@@ -1,0 +1,50 @@
+[
+  {
+    "name": "全局急停保护",
+    "src":  ["plugin_read_emergency_btn"],
+    "cond": "emergency_btn",
+    "act":  "action_full_stop"
+  },
+  {
+    "name": "传感器超时保护",
+    "src":  [],
+    "cond": "(time.time() - ts_io) > 0.2",
+    "act":  "action_full_stop"
+  },
+  {
+    "name": "空闲等待启动按钮",
+    "src":  ["plugin_read_start_btn"],
+    "cond": "task_stage=='idle' and start_btn",
+    "act":  "action_set_go_pick"
+  },
+  {
+    "name": "前往拾取点持续前进",
+    "src":  ["plugin_read_front_lidar", "plugin_read_pos"],
+    "cond": "task_stage=='go_pick' and pos_error>0.15 and front_dist>=0.6",
+    "act":  "action_move_forward"
+  },
+  {
+    "name": "拾取路径遇障碍刹车",
+    "src":  ["plugin_read_front_lidar", "plugin_read_speed"],
+    "cond": "task_stage=='go_pick' and front_dist<0.6",
+    "act":  "action_brake"
+  },
+  {
+    "name": "到达拾取点切换抓取",
+    "src":  ["plugin_read_pos"],
+    "cond": "task_stage=='go_pick' and pos_error<=0.15",
+    "act":  "action_set_gripping"
+  },
+  {
+    "name": "执行抓取",
+    "src":  [],
+    "cond": "task_stage=='gripping'",
+    "act":  "action_gripper_close"
+  },
+  {
+    "name": "抓取后前往卸料点",
+    "src":  [],
+    "cond": "task_stage=='gripping' and (time.time() - ts_io) > 1.0",
+    "act":  "action_set_go_drop"
+  }
+]
